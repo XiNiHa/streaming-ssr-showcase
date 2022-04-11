@@ -1,0 +1,26 @@
+{
+  "name": "streaming-ssr-test",
+  "private": true,
+  "packageManager": "yarn@3.2.0",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "yarn build:server && yarn build:client",
+    "build:server": "tsc",
+    "build:client": "NODE_ENV=development parcel build client-*.tsx --dist-dir dist-client --no-optimize"
+  },
+  "dependencies": {
+    "h3": "^0.7.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "serve-static": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/react": "^18.0.1",
+    "@types/react-dom": "^18.0.0",
+    "@types/serve-static": "^1.13.10",
+    "esno": "^0.14.1",
+    "parcel": "^2.4.1",
+    "typescript": "^4.6.3"
+  }
+}

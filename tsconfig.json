@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react"
+  }
+}
