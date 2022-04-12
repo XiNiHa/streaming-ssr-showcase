@@ -32,6 +32,9 @@ const NestedDataApp = () => {
     <article className="flex w-[100vw]">
       <aside>
         <h1>This is a sidebar</h1>
+        <p>
+          Try clicking the counter even when the main content is still loading!
+        </p>
         <Counter />
       </aside>
       <main className="p-4 flex-1">
@@ -40,14 +43,22 @@ const NestedDataApp = () => {
             <DataConsumer id="foobar">
               {(data) => (
                 <>
-                  Data: {data}
-                  <Counter />
+                  <p>
+                    Data: {data}
+                    <br />
+                    Try clicking the counter even when the other Suspense is
+                    still loading!
+                    <br />
+                    <Counter />
+                  </p>
                   <Suspense fallback={"Nested Loading..."}>
                     <DataConsumer id="fizzbuzz">
                       {(data) => (
                         <>
-                          Nested Data: {data}
-                          <Counter />
+                          <p>
+                            Nested Data: {data}
+                            <Counter />
+                          </p>
                         </>
                       )}
                     </DataConsumer>

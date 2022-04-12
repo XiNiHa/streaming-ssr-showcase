@@ -17,7 +17,7 @@ const DataConsumer: React.FC<{
   id: string;
   children: (data: string) => JSX.Element;
 }> = ({ id, children }) => {
-  const { value, loadScript } = loadData(id);
+  const { value } = loadData(id);
 
   return <>{children(value)}</>;
 };

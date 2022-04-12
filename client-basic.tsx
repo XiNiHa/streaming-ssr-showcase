@@ -1,19 +1,5 @@
 import React from "react";
-import ReactDOMClient from "react-dom/client";
-import BasicApp from "./routes/Basic";
+import BasickApp from "./routes/Basic";
+import init from "./clientInit";
 
-declare global {
-  interface Window {
-    BOOT?: () => void
-    LOADED?: boolean
-  }
-}
-
-window.BOOT = function() {
-  const root = document.getElementById("root");
-  if (root) {
-    ReactDOMClient.hydrateRoot(root, <div className="bg-red-200"><BasicApp /></div>);
-  }
-}
-
-if (window.LOADED) window.BOOT()
+init(() => <BasickApp />)
