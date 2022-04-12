@@ -4,16 +4,20 @@ const Context = createContext<Map<string, DataState>>(null as any);
 
 const globalCache = new Map<string, DataState>();
 
-export const CacheProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const cache =
-    typeof window !== "undefined" ? globalCache : new Map<string, DataState>();
+export const CacheProvider: React.FC<{
+  cache?: Map<string, DataState>;
+  children: ReactNode;
+}> = ({ cache, children }) => {
+  const _cache =
+    cache ??
+    (typeof window !== "undefined"
+      ? globalCache
+      : new Map<string, DataState>());
 
-  return <Context.Provider value={cache}>{children}</Context.Provider>;
+  return <Context.Provider value={_cache}>{children}</Context.Provider>;
 };
 
-type DataState =
+export type DataState =
   | {
       state: "pending";
       promise: Promise<string>;
@@ -25,12 +29,14 @@ type DataState =
 
 declare global {
   interface Window {
+    globalCache?: Map<string, DataState>;
     dataCaches?: { key: string; value: string }[];
     putCache?: (key: string, value: string) => void;
   }
 }
 
 if (typeof window !== "undefined") {
+  window.globalCache = globalCache;
   if (window.dataCaches) {
     for (const { key, value } of window.dataCaches) {
       globalCache.set(key, { state: "fulfilled", value });
