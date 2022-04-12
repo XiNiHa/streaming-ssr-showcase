@@ -2,7 +2,14 @@
  * Mocked data layer that simulates network requests
  */
 
-import React, { createContext, ReactNode, useContext } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  startTransition,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 // Context for providing the data cache
 const Context = createContext<Map<string, DataState>>(null as any);
@@ -62,6 +69,7 @@ if (typeof window !== "undefined") {
 // Hook for loading the data in React components
 export const loadData = (id: string) => {
   const cache = useContext(Context);
+  const [initialRender, setInitialRender] = useState(true);
   let cacheData = cache.get(id);
 
   // Initialize cache if there's no state with the id
@@ -90,11 +98,15 @@ export const loadData = (id: string) => {
     throw cacheData.promise;
   }
 
+  useEffect(() => {
+    startTransition(() => setInitialRender(false));
+  }, [setInitialRender]);
+
   return {
     // Return the value
     value: cacheData.value,
     // And a load script that injects the data that it depends to the global cache on browser
-    loadScript: (
+    loadScript: initialRender ? (
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -102,6 +114,6 @@ export const loadData = (id: string) => {
           `,
         }}
       />
-    ),
+    ) : null,
   };
 };
