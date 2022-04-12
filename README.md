@@ -1,6 +1,6 @@
 # streaming-ssr-showcase
 
-This repository contains 4 examples that show the usage of Streaming SSR API that got added in React 18.
+This repository contains 5 examples that show the usage of Streaming SSR API that got added in React 18.
 Feel free to ask any questions through Issues!
 
 ## `/basic`: Basic Suspense Streaming SSR Example
