@@ -3,6 +3,11 @@
 This repository contains 5 examples that show the usage of Streaming SSR API that got added in React 18.
 Feel free to ask any questions through Issues!
 
+```sh
+yarn # Install deps
+yarn build && yarn start # Launch server
+```
+
 ## `/basic`: Basic Suspense Streaming SSR Example
 
 This example shows how React Streaming SSR works.
