@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from "react";
 import Delayed, { DelayedProvider } from "../components/Delayed";
+import Safari from "../components/Safari";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -15,20 +16,26 @@ const Counter = () => {
 
 const BasicApp = () => {
   return (
-    <article className="flex w-[100vw]">
-      <aside>
-        <h1>This is a sidebar</h1>
-        <p>Try clicking the counter even when the main content is still loading!</p>
-        <Counter />
-      </aside>
-      <main className="p-4 flex-1">
-        <Suspense fallback={"Loading..."}>
-          <DelayedProvider>
-            <Delayed ms={3000}>3000ms delayed content</Delayed>
-          </DelayedProvider>
-        </Suspense>
-      </main>
-    </article>
+    <>
+      <Safari />
+      <article className="flex w-[100vw]">
+        <aside>
+          <h1>This is a sidebar</h1>
+          <p>
+            Try clicking the counter even when the main content is still
+            loading!
+          </p>
+          <Counter />
+        </aside>
+        <main className="p-4 flex-1">
+          <Suspense fallback={"Loading..."}>
+            <DelayedProvider>
+              <Delayed ms={3000}>3000ms delayed content</Delayed>
+            </DelayedProvider>
+          </Suspense>
+        </main>
+      </article>
+    </>
   );
 };
 

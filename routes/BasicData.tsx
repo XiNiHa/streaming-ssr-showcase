@@ -1,4 +1,5 @@
 import React, { Suspense, useState } from "react";
+import Safari from "../components/Safari";
 import { CacheProvider, loadData } from "../data/DataLayer";
 
 const Counter = () => {
@@ -26,21 +27,27 @@ const DataConsumer = () => {
 
 const BasicDataApp = () => {
   return (
-    <article className="flex w-[100vw]">
-      <aside>
-        <h1>This is a sidebar</h1>
-        <p>Try clicking the counter even when the main content is still loading!</p>
-        <Counter />
-      </aside>
-      <main className="p-4 flex-1">
-        <CacheProvider>
-          <Suspense fallback={"Loading..."}>
-            <DataConsumer />
-            <Counter />
-          </Suspense>
-        </CacheProvider>
-      </main>
-    </article>
+    <>
+    <Safari />
+      <article className="flex w-[100vw]">
+        <aside>
+          <h1>This is a sidebar</h1>
+          <p>
+            Try clicking the counter even when the main content is still
+            loading!
+          </p>
+          <Counter />
+        </aside>
+        <main className="p-4 flex-1">
+          <CacheProvider>
+            <Suspense fallback={"Loading..."}>
+              <DataConsumer />
+              <Counter />
+            </Suspense>
+          </CacheProvider>
+        </main>
+      </article>
+    </>
   );
 };
 
