@@ -143,9 +143,7 @@ app.use((req, res, next) => {
       console.log("shell ready");
       res.statusCode = didError ? 500 : 200;
       // Set headers for streaming
-      res.setHeader("Connection", "Transfer-Encoding");
       res.setHeader("Content-Type", "text/html; charset=utf-8");
-      res.setHeader("Transfer-Encoding", "chunked");
       // Write front HTML
       res.write(frontHTML(`<script async src="${route.source}"></script>`));
       // Pipe React app render result
